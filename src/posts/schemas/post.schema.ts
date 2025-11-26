@@ -1,0 +1,27 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+export type PostDocument = Post & Document;
+
+@Schema({ timestamps: true })
+export class Post {
+  @Prop({ required: true })
+  author: string;
+
+  @Prop({ required: true })
+  avatar: string;
+
+  @Prop({ required: true })
+  content: string;
+
+  @Prop({ default: 0 })
+  likes: number;
+
+  @Prop({ default: 0 })
+  replies: number;
+
+  @Prop()
+  timestamp: Date;
+}
+
+export const PostSchema = SchemaFactory.createForClass(Post);
