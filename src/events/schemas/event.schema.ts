@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type EventDocument = Event & Document;
 
@@ -8,7 +8,7 @@ export class Event {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ required: true })
+  @Prop()
   description: string;
 
   @Prop({ required: true })
@@ -21,16 +21,19 @@ export class Event {
   location: string;
 
   @Prop({ default: 0 })
-  attendees: number;
+  attendeesCount: number;
+
+  @Prop({ default: [] })
+  attendees: string[]; // store userIds
 
   @Prop({ required: true })
   capacity: number;
 
-  @Prop({ required: true })
+  @Prop()
   category: string;
 
-  @Prop({ default: false })
-  isAttending: boolean;
+  @Prop({ required: true, type: Types.ObjectId })
+  creatorId: Types.ObjectId;
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

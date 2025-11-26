@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { Event } from './schemas/event.schema';
@@ -9,7 +9,6 @@ export class EventsController {
 
   @Post('create')
   create(@Body() createEventDto: CreateEventDto): Promise<Event> {
-    console.log('Received event:', createEventDto);
     return this.eventsService.create(createEventDto);
   }
 
@@ -23,12 +22,13 @@ export class EventsController {
     return this.eventsService.findOne(id);
   }
 
-  @Put(':id')
-  update(
+  @Patch(':id/rsvp')
+  rsvp(
     @Param('id') id: string,
-    @Body() updateData: Partial<CreateEventDto & { isAttending?: boolean }>
+    @Body('userId') userId: string,
+    @Body('attending') attending: boolean,
   ): Promise<Event> {
-    return this.eventsService.update(id, updateData);
+    return this.eventsService.rsvp(id, userId, attending);
   }
 
   @Delete(':id')

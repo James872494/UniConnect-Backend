@@ -1,9 +1,10 @@
 export class CreateEventDto {
   title: string;
-  description: string;
+  description?: string;
   date: string;
   time: string;
   location: string;
   capacity: number;
-  category: string;
+  category?: string;
+  creatorId: string;
 }
