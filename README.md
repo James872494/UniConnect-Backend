@@ -48,4 +48,4 @@ It provides secure, scalable services for user management, posts, events, and ev
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/uniconnect-backend.git
+https://github.com/James872494/UniConnect-Backend.git
